@@ -4,7 +4,7 @@ public class CartoonBoard extends Board {
 	String image;
 	
 	public CartoonBoard () {}
-	
+	// Q.01
 	public CartoonBoard(int number, String title, String date, String content, String image) {
 		super(number, title, date, content);
 		this.image = image;
