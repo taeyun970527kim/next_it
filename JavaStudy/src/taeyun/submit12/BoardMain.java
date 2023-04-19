@@ -41,5 +41,6 @@ public class BoardMain {
 		
 		
 		
-	}
+	} // 메인문 
+	
 }
