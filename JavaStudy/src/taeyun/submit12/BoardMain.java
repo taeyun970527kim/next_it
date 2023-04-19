@@ -1,12 +1,17 @@
 package taeyun.submit12;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class BoardMain {
 
 	public static void main(String[] args) {
 		
-		BoardDB boardDB = BoardDB.getInstance();
+		Board board = Board.getInstance();
+		ArrayList<Board> boardList = new ArrayList<>();
+		
 		Scanner scan = new Scanner(System.in);
 		
 		while(true) {
@@ -17,7 +22,9 @@ public class BoardMain {
 			
 			if(num == 1) {
 				// 글 목록
-				boardDB.showList();
+				for(int i = 0; i < boardList.size(); i++) {
+					System.out.print(boardList.get(i)+ "\n");
+				}
 				
 			} else if(num == 2) {
 				// 글 쓰기
@@ -26,7 +33,8 @@ public class BoardMain {
 				System.out.print("글 내용을 입력해주세요: ");
 				String content = scan.nextLine();
 				
-				boardDB.make(title, content);
+				boardList.add(new Board(boardList.size() + 1, title, content, ""));
+				
 			} else {
 				break;
 			}

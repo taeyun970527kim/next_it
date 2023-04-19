@@ -11,28 +11,27 @@ public class Board {
 	
 	public Board() {}
 	
-	public Board(int number, String title, String date, String content) {
-		super();
-		this.number = number;
-		this.title = title;
-		this.date = date;
-		this.content = content;
+	private static Board instance = new Board();
+	
+	public static Board getInstance() {
+		return instance;
 	}
 	
-	public Board(String title, String content) {
+	public Board(int number, String title, String date, String content) {
+		super();
 		Date today = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 		String strToday = sdf.format(today);
-		this.date = strToday;
-		this.number = 0;
+		this.number = number;
 		this.title = title;
+		this.date = strToday;
 		this.content = content;
 	}
 	
 	
 	@Override
 	public String toString() {
-		return "[" + number + ". |" + title + "| " + date + "]";
+		return "[" + number + ". | " + title + " | " + date + "]";
 	}
 
 	public int getNumber() {
