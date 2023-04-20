@@ -5,7 +5,7 @@ public class Hello {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		System.out.println("Hello World");
-		
+		// 커밋 테스트
 		// ctrl+f11 실행 단축키
 		// 코드라인 복사(copy line) > ctrl+art+방향키 아래
 		// 자동완성 단축키 > ctrl+스페이스바
