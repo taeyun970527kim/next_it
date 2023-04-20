@@ -138,7 +138,7 @@ public class ApiDateMain {
 		// .set(년, 월, 일, 시, 분, 초)
 		// Month의 경우 1월이 0, 2월이 1, ... 12월 11
 		cal.set(2023, 4, 1);
-		
+		// set
 		// Calendar 객체를 Date 객체로 변환
 		System.out.println(cal.getTime());
 		
