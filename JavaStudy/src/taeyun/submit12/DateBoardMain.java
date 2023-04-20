@@ -28,7 +28,7 @@ public class DateBoardMain {
 		
 		
 		// 날짜순으로 정렬
-		System.out.println("\n==============================최신순======================================\n");
+		System.out.println("\n============================== 최신순 ======================================\n");
 		for(int i = 0; i < dbList.size()-1; i++) {
 			for(int k = 0; k < dbList.size()-1; k++) {
 				long date1 = sdf.parse(dbList.get(k).getDate()).getTime();
@@ -46,7 +46,7 @@ public class DateBoardMain {
 			System.out.println(dbList.get(i));
 		}
 		
-		System.out.println("\n==============================오래된 순======================================\n");
+		System.out.println("\n============================== 오래된 순 ======================================\n");
 		for(int i = 0; i < dbList.size()-1; i++) {
 			for(int k = 0; k < dbList.size()-1; k++) {
 				long date1 = sdf.parse(dbList.get(k).getDate()).getTime();
@@ -64,7 +64,7 @@ public class DateBoardMain {
 			System.out.println(dbList.get(i));
 		}
 		
-		System.out.println("\n==============================한달 이내======================================\n");
+		System.out.println("\n============================== 한달 이내======================================\n");
 		
 		Calendar month = Calendar.getInstance();
 		month.add(Calendar.MONTH,-1);
@@ -74,7 +74,49 @@ public class DateBoardMain {
 			}
 		}
 		
-		System.out.println("\n==============================이번달에 작성된 글만 ======================================\n");
+		System.out.println("\n============================== 이번달에 작성된 글만 ======================================\n");
+		
+		month = Calendar.getInstance();
+		month.set(month.get(Calendar.YEAR), month.get(Calendar.MONTH), 1);
+		
+		for(int i = 0; i < dbList.size(); i++) {
+			if(sdf.parse(dbList.get(i).getDate()).getTime() > month.getTimeInMillis()) {
+				System.out.println(dbList.get(i));
+			}
+		}
+		
+		System.out.println("\n============================== 2월에 작성된 글만 ======================================\n");
+		
+		month = Calendar.getInstance();
+		month.set(month.get(Calendar.YEAR), 1, 1);
+		Calendar month2 = Calendar.getInstance();
+		month2.set(month2.get(Calendar.YEAR), 1, 30);
+		
+		for(int i = 0; i < dbList.size(); i++) {
+			if(sdf.parse(dbList.get(i).getDate()).getTime() > month.getTimeInMillis() && 
+					sdf.parse(dbList.get(i).getDate()).getTime() < month2.getTimeInMillis()) {
+				System.out.println(dbList.get(i));
+			}
+		}
+		
+		System.out.println("\n========================== 2022.02.14 ~ 2023.03.21 게시글 =================================\n");
+		month = Calendar.getInstance();
+		month.set(2022, 1, 14);
+		month2 = Calendar.getInstance();
+		month2.set(2023, 2, 21);
+		
+		for(int i = 0; i < dbList.size(); i++) {
+			if(sdf.parse(dbList.get(i).getDate()).getTime() > month.getTimeInMillis() && 
+					sdf.parse(dbList.get(i).getDate()).getTime() < month2.getTimeInMillis()) {
+				System.out.println(dbList.get(i));
+			}
+		}
+		
+		
+		
+		
+		
+		
 		
 		
 		
