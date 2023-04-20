@@ -66,10 +66,15 @@ public class DateBoardMain {
 		
 		System.out.println("\n==============================한달 이내======================================\n");
 		
+		Calendar month = Calendar.getInstance();
+		month.add(Calendar.MONTH,-1);
+		for(int i = 0; i < dbList.size(); i++) {
+			if(sdf.parse(dbList.get(i).getDate()).getTime() > month.getTimeInMillis()) {
+				System.out.println(dbList.get(i));
+			}
+		}
 		
-		
-		
-		
+		System.out.println("\n==============================이번달에 작성된 글만 ======================================\n");
 		
 		
 		

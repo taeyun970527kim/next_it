@@ -146,7 +146,8 @@ public class ApiDateMain {
 		Date temp = new Date();
 		Calendar calTemp = Calendar.getInstance();
 		calTemp.setTime(temp);
-		
+		System.out.println(calTemp.getTime());
+		System.out.println(temp);
 		// Date 타입에서 long 날짜 얻기
 		System.out.println(temp.getTime());
 		
