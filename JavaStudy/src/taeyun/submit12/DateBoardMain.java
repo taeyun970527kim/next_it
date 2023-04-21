@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 public class DateBoardMain {
@@ -29,19 +30,44 @@ public class DateBoardMain {
 		
 		// 날짜순으로 정렬
 		System.out.println("\n============================== 최신순 ======================================\n");
-		for(int i = 0; i < dbList.size()-1; i++) {
-			for(int k = 0; k < dbList.size()-1; k++) {
-				long date1 = sdf.parse(dbList.get(k).getDate()).getTime();
-				long date2 = sdf.parse(dbList.get(k+1).getDate()).getTime();
-				
-				if(date1 < date2) {
-					DateBoard temp = dbList.get(k);
-					dbList.set(k, dbList.get(k+1));
-					dbList.set(k+1, temp);
+//		for(int i = 0; i < dbList.size()-1; i++) {
+//			for(int k = 0; k < dbList.size()-1; k++) {
+//				long date1 = sdf.parse(dbList.get(k).getDate()).getTime();
+//				long date2 = sdf.parse(dbList.get(k+1).getDate()).getTime();
+//				
+//				if(date1 < date2) {
+//					DateBoard temp = dbList.get(k);
+//					dbList.set(k, dbList.get(k+1));
+//					dbList.set(k+1, temp);
+//				}
+//			}
+//		}
+//		
+//		for(int i = 0; i < dbList.size(); i++) {
+//			System.out.println(dbList.get(i));
+//		}
+		// Collections.sort
+		
+		Collections.sort(dbList, new Comparator<DateBoard>() {
+
+			@Override
+			public int compare(DateBoard dbA, DateBoard dbB) {
+				int result = 0;
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+				try {
+					Date left = sdf.parse(dbA.getDate());
+					Date right = sdf.parse(dbB.getDate());
+					
+					if(left.getTime() - right.getTime() < 0) {
+							result = -1;
+						}
+					} catch (ParseException e) {
+					e.printStackTrace();
+					}
+					return result;
 				}
-			}
-		}
-		// 커밋 테스트
+			});
+		
 		for(int i = 0; i < dbList.size(); i++) {
 			System.out.println(dbList.get(i));
 		}
@@ -73,7 +99,6 @@ public class DateBoardMain {
 				System.out.println(dbList.get(i));
 			}
 		}
-		
 		System.out.println("\n============================== 이번달에 작성된 글만 ======================================\n");
 		
 		month = Calendar.getInstance();
@@ -101,7 +126,7 @@ public class DateBoardMain {
 		
 		System.out.println("\n========================== 2022.02.14 ~ 2023.03.21 게시글 =================================\n");
 		month = Calendar.getInstance();
-		month.set(2022, 1, 14);
+		month.set(2023, 1, 14);
 		month2 = Calendar.getInstance();
 		month2.set(2023, 2, 21);
 		

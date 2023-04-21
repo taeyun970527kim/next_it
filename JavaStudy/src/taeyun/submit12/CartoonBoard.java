@@ -12,7 +12,7 @@ public class CartoonBoard extends Board {
 
 	@Override
 	public String toString() {
-		return "CartoonBoard [image=" + image + "]";
+		return super.toString() + "[image=" + image + "]";
 	}
 
 	public String getImage() {

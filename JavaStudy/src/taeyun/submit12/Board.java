@@ -17,6 +17,25 @@ public class Board {
 		return instance;
 	}
 	
+//	public Board(String title, String content) {
+//		BoardDB db = BoardDB.getInstance();
+//		this.number = db.makeNumber();
+//		this.title = title;
+//		Date today = new Date();
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+//		this.date = sdf.format(today);
+//		this.content = content;
+//	}
+//	
+//	public Board(String title, String date, String content) {
+//		BoardDB db = BoardDB.getInstance();
+//		this.number = db.makeNumber();
+//		this.title = title;
+//		this.date = date;
+//		this.content = content;
+//	}
+	
+	
 	public Board(int number, String title, String date, String content) {
 		super();
 		Date today = new Date();
