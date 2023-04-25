@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class JdbcSelect {
+public class JdbcUpdate {
 
 	public static void main(String[] args) {
 		
@@ -25,39 +25,56 @@ public class JdbcSelect {
 		String id = "jdbc";
 		String pw = "oracle";
 		
-		// close() 하기 위해 try문 밖에 선언
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
+		ResultSet rs = null; // insert,update, delete 에는 resultset이 필요없음
 		
 		try {
-			// 2. 커넥션 객체 생성
-			// 오라클 DB와 접속이 된 객체를 리턴
 			conn = DriverManager.getConnection(url, id, pw);
-			System.out.println("DB 커넥션 성공");
 			
-			// 3. 쿼리문 작성
 			StringBuffer query = new StringBuffer();
+			query.append("UPDATE students 				  ");
+			query.append("SET	stu_score = stu_score + 1 ");
+			query.append("WHERE  1 = 1		 		      "); // 1=1 은 항상 true
+			query.append("AND    stu_id = ?			      ");
+			
+			// 값에 대해 ?로 표기한 후 다음 단계에서 ?에 값을 채워주어도 된다.
+			
+			ps = conn.prepareStatement(query.toString());
+			
+			// 위에서부터 ?를 채워나가며,
+			// 위에서부터 ?의 인덱스는 1부터 증가한다
+			int idx = 1; // 중간에 수정할 일 있을때 숫자까지 바꿔줘야하니 idx++
+			ps.setString(idx++, "d001");
+			
+			// 쿼리문 실행
+			// insert, delete, update 문은
+			// ps.executeUpdate() 실행
+			// 기본적으로 자동커밋
+			
+			// cnt에는 'n행이 수정 되었습니다'의 n이 저장된다.
+			int cnt = ps.executeUpdate();
+			
+			System.out.println(cnt + "행 이(가) 수정되었습니다.");
+			
+			// 업데이트문 실행 후 SELECT문 실행하여 변경사항 확인하기
+			
+			query = new StringBuffer();
 			query.append("SELECT				");
 			query.append("		stu_id			");
 			query.append("	, stu_password 		");
 			query.append("	, stu_name			");
 			query.append("	, stu_score			");
 			query.append("FROM					");
-			query.append("		students		"); // 주의: 세미콜론이 없음
+			query.append("		students		");
 			
-			// 4. 쿼리문을 보유하고 실행할 수 있는 객체 생성
-			// 객체(PreparedStatement) 생성
+			// 사용했던 ps는 한번 닫아준 뒤 사용
+			ps.close();
 			ps = conn.prepareStatement(query.toString());
 			
-			// 5. 쿼리문 실행
-			// SELECT문의 경우 executeQuery()
-			// SELECT문의 경우 실행결과 ResultSet에 담는다
 			rs = ps.executeQuery();
 			
-			// 6. ResultSet에 담긴 데이터 조회
 			while(rs.next()) {
-				// 쿼리문 실행 결과에 해당하는 컬럼명과 일치해야 함
 				String stuId = rs.getString("stu_id");
 				String stuPw = rs.getString("stu_password");
 				String stuName = rs.getString("stu_name");
@@ -68,11 +85,9 @@ public class JdbcSelect {
 						+ "이름: " + stuName
 						+ "점수: " + stuScore);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			// 7. 자원 정리
+		} finally { 
 			if(rs != null) try { rs.close();} catch (SQLException e) {e.printStackTrace();} 
 			if(ps != null) try { ps.close();} catch (SQLException e) {e.printStackTrace();}
 			if(conn != null) try { conn.close();} catch (SQLException e) {e.printStackTrace();}
