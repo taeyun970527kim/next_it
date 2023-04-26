@@ -60,13 +60,13 @@ public class JdbcUpdate {
 			// 업데이트문 실행 후 SELECT문 실행하여 변경사항 확인하기
 			
 			query = new StringBuffer();
-			query.append("SELECT				");
-			query.append("		stu_id			");
-			query.append("	, stu_password 		");
-			query.append("	, stu_name			");
-			query.append("	, stu_score			");
-			query.append("FROM					");
-			query.append("		students		");
+			query.append("SELECT			");
+			query.append("		stu_id		");
+			query.append("	, stu_password 	");
+			query.append("	, stu_name		");
+			query.append("	, stu_score		");
+			query.append("FROM				");
+			query.append("		students	");
 			
 			// 사용했던 ps는 한번 닫아준 뒤 사용
 			ps.close();

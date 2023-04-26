@@ -116,10 +116,10 @@ public class JdbcTransaction {
 						// DB의 동욱씨 계좌 잔액 꺼내와서 출력
 						
 						query = new StringBuffer();
-						query.append("SELECT 	bank_money						");
-						query.append("FROM		bank							");
-						query.append("WHERE		1=1								");
-						query.append("AND		bank_account = ?				");
+						query.append("SELECT 	bank_money			");
+						query.append("FROM		bank				");
+						query.append("WHERE		1=1					");
+						query.append("AND		bank_account = ?	");
 						
 						ps.close();
 						ps = conn.prepareStatement(query.toString());
