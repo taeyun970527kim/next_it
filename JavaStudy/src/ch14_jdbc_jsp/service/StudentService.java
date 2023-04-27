@@ -84,4 +84,18 @@ public class StudentService {
 		return result;
 	}
 	
+	// 학생 점수 증가 메소드
+	public void plusScore(String stuId) {
+		Connection conn = cp.getConnection();
+		
+		try {
+			dao.plusScore(conn, stuId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			cp.releaseConnection(conn);
+		}
+	}
+	
+	
 }
