@@ -22,22 +22,22 @@ public class BoardDAO {
 	// 글쓰기 메소드
 	public int writeBoard(Connection conn, BoardVO board) throws SQLException {
 		StringBuffer query = new StringBuffer();
-		query.append("INSERT INTO	boards	(		");
-		query.append("			  board_num			");
-		query.append("			, board_title		");
-		query.append("			, board_content		");
-		query.append("			, board_arthor		");
-		query.append("			, board_date		");
-		query.append(") 		VALUES 	(			");
-		query.append("				?				");
-		query.append("				, ?				");
-		query.append("				, ?				");
-		query.append("				, ?				");
-		query.append(" 				, ?	)			");
+		query.append("INSERT INTO	boards	(				");
+		query.append("			  board_num					");
+		query.append("			, board_title				");
+		query.append("			, board_content				");
+		query.append("			, board_arthor				");
+		query.append("			, board_date				");
+		query.append(") 		VALUES 	(					");
+		query.append("	(SELECT COUNT(*) + 1 FROM boards)	");
+		query.append("				, ?						");
+		query.append("				, ?						");
+		query.append("				, ?						");
+		query.append(" 				, ?	)					");
 		
+//		SELECT COUNT(*) + 1 FROM boards
 		PreparedStatement ps = conn.prepareStatement(query.toString());
 		int idx = 1;
-		ps.setInt(idx++, board.getBoardNum()+1);
 		ps.setString(idx++, board.getBoardTitle());
 		ps.setString(idx++, board.getBoardContent());
 		ps.setString(idx++, board.getBoardArthor());
@@ -49,15 +49,16 @@ public class BoardDAO {
 		
 		return cnt;
 	}
-	// 글조회
+	//  게시글 목록 || 글조회
 	public ArrayList<BoardVO> getBoardList(Connection conn) throws SQLException {
 		StringBuffer query = new StringBuffer();
-		query.append("SELECT	board_num	");
-		query.append("		, board_title	");
-		query.append("		, board_content	");
-		query.append("		, board_arthor	");
-		query.append("		, board_date	");
-		query.append("FROM		boards		");
+		query.append("SELECT	board_num		");
+		query.append("		, board_title		");
+		query.append("		, board_content		");
+		query.append("		, board_arthor		");
+		query.append("		, board_date		");
+		query.append("FROM		boards			");
+		query.append("ORDER BY	board_num asc	");
 		
 		PreparedStatement ps = conn.prepareStatement(query.toString());
 		

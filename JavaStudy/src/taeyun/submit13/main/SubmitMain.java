@@ -64,7 +64,7 @@ public class SubmitMain {
 						int select = Integer.parseInt(scan.nextLine());
 						
 						if(select == 1) {
-							// TODO 글쓰기
+							// 글쓰기
 							System.out.print("글 제목을 입력해주세요: ");
 							String title = scan.nextLine();
 							
@@ -74,14 +74,36 @@ public class SubmitMain {
 							BoardVO board = new BoardVO(title, content, login.getMemId());
 							boardService.writeBoard(board);
 							
-							
-						} else if(select == 2) {
-							// 글조회
+							// 게시글 목록
 							ArrayList<BoardVO> boardList = boardService.getBoardList();
 							for(int i = 0; i < boardList.size(); i++) {
 								System.out.println(boardList.get(i));
 							}
 							
+							
+						} else if(select == 2) {
+							// 글조회
+							System.out.print("글 번호를 입력해주세요:");
+							int boardNum = Integer.parseInt(scan.nextLine());
+							ArrayList<BoardVO> boardList = boardService.getBoardList();
+							
+							if(boardNum <= boardList.size()) {
+								for(int i = 0; i < boardList.size(); i++) {
+									if(boardList.get(i).getBoardNum() == boardNum) {
+										System.out.println("\n=========================================\n");
+										System.out.println("제목: " + boardList.get(i).getBoardTitle());
+										System.out.println("작성자: " + boardList.get(i).getBoardArthor());
+										System.out.println("작성일: " + boardList.get(i).getBoardDate());
+										System.out.println("글내용: " + boardList.get(i).getBoardContent());
+										System.out.println("\n=========================================\n");
+									}
+								}
+								for(int i = 0; i < boardList.size(); i++) {
+								System.out.println(boardList.get(i));
+								}
+							} else {
+								System.out.println("입력하신 번호의 게시글이 존재하지 않습니다.");
+							}
 						} else if(select == 3) {
 							// 로그아웃
 							System.out.println("로그아웃 하였습니다.");
