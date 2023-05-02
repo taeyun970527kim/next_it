@@ -22,7 +22,7 @@ public class TraesureHunter {
 		for(int i = 0; i < inner.length; i++) {
 			if(inner[i].isDirectory()) {
 				// 폴더
-				findFile(inner[i]);
+				findFile(inner[i]); // 재귀함수
 			} else {
 				// 파일
 				System.out.println(inner[i]);

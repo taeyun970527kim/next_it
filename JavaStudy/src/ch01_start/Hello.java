@@ -13,7 +13,7 @@ public class Hello {
 		System.out.println("오늘은 화요일");
 		System.out.println("오늘은 화요일");
 		System.out.println("오늘은 화요일");
-		// 코드라인 삭세 > ctrl+d , 실행 취소 cntl+z
+		// 코드라인 삭제 > ctrl+d , 실행 취소 cntl+z
 		// 실행취소의 취소 > cntl+y
 		
 	
