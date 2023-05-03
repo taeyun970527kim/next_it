@@ -78,7 +78,12 @@ public class JdbcSelect {
 			if(conn != null) try { conn.close();} catch (SQLException e) {e.printStackTrace();}
 		}
 		
-		
+		// 패키지 -> properties -> java build path -> add external jar
+		// 기존 statement 객체로는 order절이나 where절 등 조건을 주어야 할때 보안에 취약하므로 preparedstatement를 사용
+		// CF는 connection 객체를 제공하는 클래스 매번 드라이버 로딩이나 conn 객체를 생성할 필요가없다.
+		// CP는 쿼리문이 실행될때마다 사용되는 connection 객체를 빌려주고 반환 받는 클래스로 connection 객체를 관리한다
+		// DAO는 DB와 연결하여 처리할 메소드들을 모아 둔 클래스
+		// Service는 실제 사용할 메소드들을 보관해둔 클래스
 		
 		
 		

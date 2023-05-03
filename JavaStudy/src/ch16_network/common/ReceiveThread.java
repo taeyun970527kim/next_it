@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
-// 연결된 소켓의 InputSteramd으로 들어온 텍스트 콘솔에 출력
+// 연결된 소켓의 InputStream으로 들어온 텍스트 콘솔에 출력
 public class ReceiveThread extends Thread {
 	private Socket socket;
 	

@@ -8,7 +8,7 @@ import taeyun.submit13.service.MemberService;
 import taeyun.submit13.vo.BoardVO;
 import taeyun.submit13.vo.MemberVO;
 
-public class SubmitMain {
+public class Submit13Main {
 
 	public static void main(String[] args) {
 		MemberService memService = MemberService.getInstance();
@@ -32,6 +32,7 @@ public class SubmitMain {
 			
 			if(command == 1) {
 				// 회원가입
+				
 				System.out.print("아이디를 입력해주세요: ");
 				String id = scan.nextLine();
 				
