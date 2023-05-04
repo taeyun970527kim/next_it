@@ -63,7 +63,7 @@ public class DiskMain {
 								
 								videoDB.watchMv(num);
 							} else if(choice == 2) {
-								// TODO 중복 제거
+								// 중복 제거
 								videoDB.recommandMv();
 								
 								

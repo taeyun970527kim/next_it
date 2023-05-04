@@ -18,8 +18,8 @@ public class QuestionDAO {
 		return instance;
 	}
 	
-	// 문제 보기
-	public QuestionVO q_sub1(Connection conn) throws SQLException {
+	// 소프트웨어 설계
+	public ArrayList<QuestionVO> q_sub1(Connection conn) throws SQLException {
 		StringBuffer query = new StringBuffer();
 		query.append("SELECT	q_no		");
 		query.append("		, question		");
@@ -28,20 +28,29 @@ public class QuestionDAO {
 		query.append("		, num_three		");
 		query.append("		, num_four		");
 		query.append("FROM		questions	");
+		query.append("WHERE		subject = ?	");
 		
 		PreparedStatement ps = conn.prepareStatement(query.toString());
 		
+		int idx = 1;
+		
+		ps.setString(idx++, "소프트웨어 설계");
+		
 		ResultSet rs = ps.executeQuery();
 		
-		QuestionVO result = new QuestionVO();
+		ArrayList<QuestionVO> result = new ArrayList<>();
 		
 		while(rs.next()) {
-			result.setNum(rs.getInt("q_no"));
-			result.setTitle(rs.getString("question"));
-			result.setOne(rs.getString("num_one"));
-			result.setTwo(rs.getString("num_two"));
-			result.setThree(rs.getString("num_three"));
-			result.setFour(rs.getString("num_four"));
+			int num = rs.getInt("q_no");
+			String question = rs.getString("question");
+			String one = rs.getString("num_one");
+			String two = rs.getString("num_two");
+			String three = rs.getString("num_three");
+			String four = rs.getString("num_four");
+			
+			QuestionVO temp = new QuestionVO("소프트웨어 설계", num, question, one, two, three, four);
+			
+			result.add(temp);
 		}
 		
 		ps.close();
@@ -50,5 +59,45 @@ public class QuestionDAO {
 		return result;
 	}
 	
+	// 소프트웨어 개발
+	public ArrayList<QuestionVO> q_sub2(Connection conn) throws SQLException {
+		StringBuffer query = new StringBuffer();
+		query.append("SELECT	q_no		");
+		query.append("		, question		");
+		query.append("		, num_one		");
+		query.append("		, num_two		");
+		query.append("		, num_three		");
+		query.append("		, num_four		");
+		query.append("FROM		questions	");
+		query.append("WHERE		subject = ?	");
+		
+		PreparedStatement ps = conn.prepareStatement(query.toString());
+		
+		int idx = 1;
+		
+		ps.setString(idx++, "소프트웨어 개발");
+		
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<QuestionVO> result = new ArrayList<>();
+		
+		while(rs.next()) {
+			int num = rs.getInt("q_no");
+			String question = rs.getString("question");
+			String one = rs.getString("num_one");
+			String two = rs.getString("num_two");
+			String three = rs.getString("num_three");
+			String four = rs.getString("num_four");
+			
+			QuestionVO temp = new QuestionVO("소프트웨어 개발", num, question, one, two, three, four);
+			
+			result.add(temp);
+		}
+		
+		ps.close();
+		rs.close();
+		
+		return result;
+	}
 	
 }
