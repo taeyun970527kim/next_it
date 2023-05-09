@@ -21,9 +21,10 @@ public class ReceiveThread extends Thread {
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			
 			while(true) {
-				// SendThread의 PrintWriter가 flush할떄까지 대기함
+				// SendThread의 PrintWriter가 flush할때까지 대기함
 				String msg = reader.readLine();
 				System.out.println(msg);
+				
 				
 				if(msg.equals("대화가 종료되었습니다.")) {
 					break;
